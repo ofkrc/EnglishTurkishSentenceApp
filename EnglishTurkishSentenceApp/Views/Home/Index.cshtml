@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Sentence Viewer";
+    int index = ViewBag.Index;
+    string sentence = ViewBag.Sentence;
+    string translation = ViewBag.Translation;
+}
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 80vh; cursor: pointer;" onclick="submitForm()">
+    <div class="text-center">
+        <h1>@sentence</h1>
+        @if (!string.IsNullOrEmpty(translation))
+        {
+            <h2 class="text-muted">@translation</h2>
+        }
+        <form id="sentenceForm" asp-action="NextSentence" method="post" style="display:none;">
+            <input type="hidden" name="currentIndex" value="@index" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function submitForm() {
+            document.getElementById('sentenceForm').submit();
+        }
+    </script>
+}
